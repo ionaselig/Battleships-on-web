@@ -116,8 +116,8 @@ class Player
 
 	#Grid user interface
 
-	def display_grid
-		content = grid.cells.map{|row|row.map{|cell| cell.display}}
+	def display_grid(hide_ships = true)
+		content = grid.cells.map{|row|row.map{|cell| cell.display(hide_ships)}}
 		table = Terminal::Table.new rows: content
 		puts table
 	end

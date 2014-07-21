@@ -73,7 +73,7 @@ describe Game do
 			player = game.current_player
 			expect(player).to receive(:shoot_at).and_return(RuntimeError)
 			expect(player).to receive(:request_coordinate_to_attack)
-			expect(STDOUT).to receive(:puts)
+			expect(STDOUT).to receive(:puts).twice
 			game.play_turn
 		end
 
