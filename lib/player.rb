@@ -13,7 +13,12 @@ class Player
 	def deploy_ships(ships)
 		ships.each do |ship| 
 			deploy(ship, request_coordinate_to_place(ship))
+			print_own_grid
 		end
+	end
+
+	def print_own_grid
+		display_grid(false)
 	end
 
 	def deploy(ship, at_coordinates)
@@ -85,7 +90,7 @@ class Player
 	end
 
 	def have_shared_row_or_column?(coordinates)
-		shared_column?(coordinates) or shared_column?(coordinates)
+		shared_row?(coordinates) or shared_column?(coordinates)
 	end
 
 	def shared_column?(coordinates)
