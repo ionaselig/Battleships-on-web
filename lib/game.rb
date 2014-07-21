@@ -28,6 +28,7 @@ class Game
 	end
 
 	def start_game
+		current_player.display_grid
 		print_player1_prompt
 		current_player.deploy_ships(ship_factory)
 		print_player2_prompt

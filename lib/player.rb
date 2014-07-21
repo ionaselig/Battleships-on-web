@@ -122,9 +122,26 @@ class Player
 	#Grid user interface
 
 	def display_grid(hide_ships = true)
-		content = grid.cells.map{|row|row.map{|cell| cell.display(hide_ships)}}
-		table = Terminal::Table.new rows: content
+		content = create_content(hide_ships)
+		content = index_rows(content)
+		table = create_table(content)
 		puts table
+	end
+
+	def create_content(hide_ships)
+		grid.cells.map{|row| row.map{|cell| cell.display(hide_ships)}}
+	end
+
+	def index_rows(content)
+		indexed_rows = []
+		content.each_with_index do |row, index|
+			indexed_rows << [index+1] + row
+		end
+		indexed_rows
+	end
+
+	def create_table(content)
+		Terminal::Table.new title: "Battle Royale... At Sea", headings: ['/'] + ('a'..'j').to_a, rows: content
 	end
 
 end

@@ -2,11 +2,11 @@ require 'game'
 
 describe Game do
 
-	let(:game) 		{ Game.new																							}
-	let(:player1) { double :player1, :grid => grid1, :deploy_ships => nil	}
-	let(:player2) { double :player2, :grid => grid2, :deploy_ships => nil	}
-	let(:grid1)  	{ double :grid1, :count_sunken_ships => 5 							}
-	let(:grid2)		{ double :grid2, :count_sunken_ships => 0 							}
+	let(:game) 		{ Game.new																																		}
+	let(:player1) { double :player1, :grid => grid1, :deploy_ships => nil, :display_grid => nil	}
+	let(:player2) { double :player2, :grid => grid2, :deploy_ships => nil												}
+	let(:grid1)  	{ double :grid1, :count_sunken_ships => 5 																		}
+	let(:grid2)		{ double :grid2, :count_sunken_ships => 0 																		}
 
 	context 'At the start of the game' do
 	
@@ -55,7 +55,6 @@ describe Game do
 			game.change_turn
 			expect(game.other_player).to be player1
 		end
-
 
 		it 'can declare victory' do
 			game.other_player = player1

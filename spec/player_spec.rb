@@ -2,12 +2,14 @@ require 'player'
 
 	describe Player do 
 
-		let(:player)  	{Player.new																							}	
-		let(:ship)			{ double :ship, :shield_level => 2											}
-		let(:destroyer) {double :destroyer																			}
+	let(:player)  	{Player.new																							}	
+	let(:ship)			{ double :ship, :shield_level => 2											}
+	let(:destroyer) {double :destroyer																			}
 
+	before(:each)		{ allow(STDOUT).to receive(:puts)												}
+	
 	context 'At start of game' do
-		
+
 		it "should have a grid when created" do 
 			expect(player.grid.is_a?(Grid)).to be true
 		end
