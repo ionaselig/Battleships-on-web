@@ -5,8 +5,12 @@ class BattleShips < Sinatra::Base
     erb :index
   end
 
-  get '/name_check' do
+  get '/name_input' do
   	erb :new_game
+	end
+
+	get '/initialise_game' do
+		erb :init_game
 	end
 
   # start the server if ruby file executed directly
