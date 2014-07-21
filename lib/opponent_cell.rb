@@ -7,6 +7,6 @@ require './lib/cell'
 
 class OpponentCell < Cell 
 	def display
-		'~'
+		'-'
 	end
 end

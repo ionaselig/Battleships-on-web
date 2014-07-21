@@ -61,11 +61,11 @@ class Game
 
 	def play_turn
 		begin
-			# current_player.display_tracking_grid
+			other_player.display_grid
 			current_player.shoot_at(other_player.grid, current_player.request_coordinate_to_attack)
 			end_game if victory_declared
 			change_turn
-		rescue RuntimeError => error
+		rescue Exception => error
 			puts error.message
 		end
 	end
