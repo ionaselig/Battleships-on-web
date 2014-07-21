@@ -9,7 +9,8 @@ class BattleShips < Sinatra::Base
   	erb :new_game
 	end
 
-	get '/initialise_game' do
+	post '/init_game' do
+		@name = params[:player]
 		erb :init_game
 	end
 

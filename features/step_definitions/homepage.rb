@@ -10,13 +10,18 @@ Then(/^I should see "(.*?)"$/) do |text|
   expect(page).to have_content(text)
 end
 
+Then(/^I should not see "(.*?)"$/) do |text|
+  expect(page).not_to have_content(text)
+end
 
-# When(/^I fill "(.*?)"$/) do |text|
-# 	expect(page).to have_selector '#' << text
-# 	fill_in text, :with => 'Jeremy'
-# end
 
 When (/^I fill "(.*?)" with "(.*?)"$/)  do |field, value|
     fill_in(field, :with => value)
 end
+
+When(/^I press "(.*?)"$/) do |button|
+  click_on button
+end
+
+
 

@@ -4,7 +4,10 @@
   <title>BattleShips App</title>
 </head>
 <body>
-		<input id="name-input" type="text">What's your name?</input>
-  	<button id="enter-name"><a href="initialise_game">Go!</a></button>
+	<form name="submit-player" action="init_game" method="post">
+		What's your name?<input type="text" name="player" required>
+		<button name="submit-button" type="submit">Go!</button>
+	</form>
 </body>
-</html
+</html>
+
