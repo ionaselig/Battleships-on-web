@@ -27,7 +27,7 @@ class BattleShips < Sinatra::Base
 	end
 
   get '/launch_game' do
-
+    erb :launch_game
   end
 
 
