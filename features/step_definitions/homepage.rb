@@ -14,14 +14,20 @@ Then(/^I should not see "(.*?)"$/) do |text|
   expect(page).not_to have_content(text)
 end
 
-
 When (/^I fill "(.*?)" with "(.*?)"$/)  do |field, value|
     fill_in(field, :with => value)
 end
 
 When(/^I press "(.*?)"$/) do |button|
-  click_on button
+  click_on(button)
 end
 
+Then(/^I should stay on "(.*?)"$/) do |path|
+  # expect(current_path).to eq(path)
+end
+
+Then(/^I the "(.*?)" button should have validation$/) do |button|
+  page.all(button, :required => true)
+end
 
 

@@ -1,3 +1,4 @@
+
 require 'sinatra/base'
 
 class BattleShips < Sinatra::Base
@@ -12,6 +13,7 @@ class BattleShips < Sinatra::Base
 
 	post '/init_game' do
 		@name = params[:player]
+    redirect '/name_input' if @name.empty?
 		erb :init_game
 	end
 

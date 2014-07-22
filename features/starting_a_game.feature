@@ -9,6 +9,7 @@ Feature: Starting the game
 		Then I should see "What's your name?"
 		When I fill "player" with "Jeremy"
 		When I press "Go!"
+		Then I should see "Welcome Jeremy"
 		Then I should see "Battleships Initializing..."
 
 	Scenario: Registering Error
@@ -17,4 +18,4 @@ Feature: Starting the game
 		Then I should see "What's your name?"
 		When I fill "player" with ""
 		When I press "Go!"
-		Then I should stay the name_input page
+		Then I should not see "Battleships Initializing..."
