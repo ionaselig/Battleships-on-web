@@ -22,15 +22,14 @@ class BattleShips < Sinatra::Base
     redirect '/name_input' if @name.empty?
     session[:greeting] = "Welcome #{@name} please enter your opponent"
     session[:players] <<  params[:player]
-    puts session[:players].inspect
     redirect '/launch_game' if session[:players].count == 2
 		redirect '/name_input'
 	end
 
-  # get '/init_game' do
-  #   sleep 5
-  #   redirect '/name_input'
-  # end
+  get '/launch_game' do
+
+  end
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0

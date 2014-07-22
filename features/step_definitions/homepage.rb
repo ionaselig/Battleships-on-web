@@ -30,4 +30,11 @@ Then(/^I the "(.*?)" button should have validation$/) do |button|
   page.all(button, :required => true)
 end
 
+Given(/^"(.*?)" has registered$/) do |player|
+  visit '/'
+  click_link("launch-name-input")
+  fill_in("player", :with => player)
+  click_on("Go!")
+end
+
 
