@@ -1,5 +1,4 @@
 require 'cell'
-require 'ship'
 
 describe 'cell' do
 
@@ -35,14 +34,12 @@ describe 'cell' do
 		expect(occupied_cell.attack!).to be_an_instance_of Hit
 	end
 
-	it 'prints a hit result to screen' do
-		expect(STDOUT).to receive(:puts).with("HIT")
-		occupied_cell.attack!
+	it 'returns a HIT message' do
+		expect(occupied_cell.message).to eq "HIT"
 	end
 
-	it 'prints a miss result to screen' do
-		expect(STDOUT).to receive(:puts).with("MISS")
-		cell.attack!
+	it 'return a MISS message' do
+		expect(cell.message).to eq "MISS"
 	end
 
 	it 'should display ~ if occupied by water' do

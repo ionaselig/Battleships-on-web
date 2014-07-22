@@ -4,12 +4,6 @@ shared_examples 'ship' do
 
 	let(:ship)			{ Ship.new 																			}
 	let(:weak_ship) { Ship.new(1) 																	}
-	let(:cell)			{ double :cell, :occupy_with => nil 						}
-	let(:grid)			{ double :grid, :cell => cell, :add_ship => nil }
-
-	before(:each) do
-		allow(STDOUT).to receive(:puts)
-	end
 
 	it 'should not be sunk when created' do 
 		expect(ship).not_to be_sunk
@@ -28,6 +22,10 @@ shared_examples 'ship' do
 		expect(ship).to be_sunk
 	end
 
+	it 'should send a message if sunk' do
+		expect(ship.sink!.message).to eq "Sunk Ship!"
+	end
+
 	it 'shield level should reduce by 1 when attacked' do
 		expect(ship.attack!.shield_level).to eq (Ship::DEFAULT_SHIELD_LEVEL) -1
 	end
@@ -35,23 +33,6 @@ shared_examples 'ship' do
 	it 'an attack should sink a ship with shield level 1' do
 		weak_ship.attack!
 		expect(weak_ship).to be_sunk
-	end
-
-	it 'should deploy a ship to a given grid coordinate' do
-		expect(cell).to receive(:occupy_with).with(weak_ship)
-		weak_ship.deploy_to(grid, [:a1]) 
-	end
-
-
-	it 'should deploy a ship to a given set of grid coordinates' do
-		expect(cell).to receive(:occupy_with).with(ship).exactly(3).times
-		ship.deploy_to(grid, [:a1, :a2, :a3]) 
-	end
-
-	it 'a deployed ship should be in the grid' do
-		allow(cell).to receive(:occupy_with).with(weak_ship)
-		expect(grid).to receive(:add_ship).with(weak_ship)
-		weak_ship.deploy_to(grid, [:a1]) 
 	end
 
 end

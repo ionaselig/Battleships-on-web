@@ -1,5 +1,3 @@
-require './lib/grid'
-
 class Ship
 
 	DEFAULT_SHIELD_LEVEL = 3
@@ -17,7 +15,6 @@ class Ship
 
 	def sink!
 	 	@sunk = true
-	 	puts "Sunk #{self.class}!"
 	 	self
 	end
 
@@ -27,11 +24,8 @@ class Ship
 		self
 	end
 
-	def deploy_to(grid, coordinates)
-		grid.add_ship(self) 
-		coordinates.each do |coordinate|
-			grid.cell(coordinate).occupy_with(self)
-		end
+	def message
+		"Sunk #{self.class}!" if sunk?
 	end
 
 end

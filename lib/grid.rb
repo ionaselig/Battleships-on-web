@@ -7,8 +7,8 @@ class Grid
 	attr_reader :size
 	attr_accessor :cells
 
-	def initialize(options = {})
-		@size = options.fetch(:size, DEFAULT_SIZE)
+	def initialize()
+		@size = DEFAULT_SIZE
 		@cells = create_cells
 	end
 
@@ -25,25 +25,13 @@ class Grid
 
 	def attack_cell(grid_reference)
 		x, y = grid_reference_to_index(grid_reference)
+		result = cells[x][y].message
 		cells[x][y] = cells[x][y].attack!
+		result
 	end
 
 	def cell_count
 		@cells.flatten.count
-	end
-
-	#Context: ships in the grid
-
-	def ships
-		@ships ||= []
-	end
-
-	def add_ship(ship)
-		ships << ship
-	end
-
-	def count_sunken_ships
-		ships.select(&:sunk?).count
 	end
 
 end

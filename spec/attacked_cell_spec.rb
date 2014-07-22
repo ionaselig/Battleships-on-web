@@ -4,8 +4,12 @@ describe AttackedCell do
 
 let(:attacked_cell) {AttackedCell.new}
 
-	it 'can not be attacked' do 
-		expect(lambda{attacked_cell.attack!}).to raise_error(RuntimeError) 
+	it 'is immune to attacks' do 
+		expect(attacked_cell.attack!).to be attacked_cell
+	end
+
+	it 'can tell the user it has been attacked' do
+		expect(attacked_cell.message).to eq 'This cell has already been attacked. Try again!'
 	end
 
 end

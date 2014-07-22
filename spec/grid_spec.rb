@@ -13,10 +13,6 @@ describe Grid do
 			expect(grid.size).to eq Grid::DEFAULT_SIZE
 		end
 
-		it 'can be initialized with a size of N' do
-			expect(Grid.new(size: 12).size).to eq 12
-		end
-
 	end
 
 	context 'Cells in grid:' do
@@ -35,30 +31,9 @@ describe Grid do
 		end
 
 		it 'should be able to be attacked' do
+			expect(grid.cell(:a1)).to receive(:message)
 			expect(grid.cell(:a1)).to receive(:attack!)
 			grid.attack_cell(:a1)
-		end
-
-	end
-
-	context 'Ships in the grid:' do
-
-		it 'it can hold ships' do
-			expect(grid.ships.is_a?(Array)).to be true
-		end
-
-		it 'should have no ships initially' do
-			expect(grid.ships).to be_empty
-		end
-
-		it 'a ship can be added' do
-			grid.add_ship(ship)
-			expect(grid.ships).not_to be_empty
-		end
-
-		it 'it can count sunk ships' do
-			grid.add_ship(sunken_ship)
-			expect(grid.count_sunken_ships).to be 1
 		end
 
 	end

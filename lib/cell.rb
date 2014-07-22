@@ -23,6 +23,11 @@ class Cell
 		self
 	end
 
+	def message
+		return "HIT" if occupied?
+		"MISS"
+	end
+
 	def attack!
 		@occupier.attack!
 		return score_hit if occupied?
@@ -30,12 +35,10 @@ class Cell
 	end
 
 	def score_hit
-		puts "HIT"
-		return Hit.new
+		Hit.new
 	end
 
 	def score_miss
-		puts "MISS"
 		Miss.new
 	end
 	
