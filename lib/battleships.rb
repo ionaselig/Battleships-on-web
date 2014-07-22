@@ -1,6 +1,6 @@
 
 require 'sinatra/base'
-require './lib/play.rb'
+
 
 class BattleShips < Sinatra::Base
 
@@ -13,23 +13,22 @@ class BattleShips < Sinatra::Base
     erb :index
   end
 
-  get '/name_input' do
+  get '/new_game' do
     @greeting = session[:greeting]
   	erb :new_game
 	end
 
-	post '/init_game' do
+	post '/new_game' do
 		@name = params[:player]
-  #   redirect '/name_input' if @name.empty?
-  #   session[:greeting] = "Welcome #{@name} please enter your opponent"
-  #   session[:players] <<  params[:player]
-  #   redirect '/launch_game' if session[:players].count == 2
-		# redirect '/name_input'
+    redirect '/name_input' if @name.empty?
+    session[:greeting] = "Welcome #{@name} please enter your opponent"
+    session[:players] <<  params[:player]
+    redirect '/launch_game' if session[:players].count == 2
+		redirect '/new_game'
 	end
 
   get '/launch_game' do
     erb :launch_game
-    @game = main
   end
 
 
