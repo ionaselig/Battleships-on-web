@@ -5,7 +5,7 @@
 </head>
 <body>
 	<form name="submit-player" action="init_game" method="post">
-		What's your name?<input type="text" name="player" required>
+		<%=@greeting%><input type="text" name="player" required>
 		<button name="submit-button" type="submit">Go!</button>
 	</form>
 </body>
