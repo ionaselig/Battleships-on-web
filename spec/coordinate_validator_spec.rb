@@ -15,22 +15,27 @@ describe 'CoordinateValidator' do
 	end
 
 	it 'can check if coordinates are valid for a ship - number of coords' do
-		expect(helper.valid_coordinates?(ship, grid, [:a1, :a2, :a3] )).to be false
+		expect(helper.valid_coordinates_for?(ship, grid, [:a1, :a2, :a3] )).to be false
 	end
 
 	it 'can check if coordinates are valid for a ship - same row or column' do
-		expect(helper.valid_coordinates?(ship, grid,[:a1, :b2,] )).to be false
-		expect(helper.valid_coordinates?(ship, grid,[:a1, :a2,] )).to be true
+		expect(helper.valid_coordinates_for?(ship, grid,[:a1, :b2,] )).to be false
+		expect(helper.valid_coordinates_for?(ship, grid,[:a1, :a2,] )).to be true
 	end
 
 	it 'can check if coordinates are valid for a ship - all cells vacant' do
 		expect(helper).to receive(:all_coordinates_vacant?).and_return(false)
-		expect(helper.valid_coordinates?(ship, grid, [:a1, :a2,] )).to be false
+		expect(helper.valid_coordinates_for?(ship, grid, [:a1, :a2,] )).to be false
 	end
 
 	it 'should check if coordinates are valid - belong to grid' do
 		expect(helper.on_grid?([:j11, :j12])).to be false
 		expect(helper.on_grid?([:j8, :j9])).to be true
+	end
+
+	it 'should check if coordinates are valid to attack' do
+		expect(helper.valid_coordinate?(:a1)).to be true
+		expect(helper.valid_coordinate?(:z11)).to be false
 	end
 
 end

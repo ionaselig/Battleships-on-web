@@ -19,7 +19,7 @@ module CoordinateValidator
 		first_letter == last_letter
 	end
 
-	def valid_coordinates?(ship, grid, coordinates)
+	def valid_coordinates_for?(ship, grid, coordinates)
 		return false unless on_grid?(coordinates)
 		return false unless all_coordinates_vacant?(grid, coordinates)
 		return false unless have_shared_row_or_column?(coordinates)
@@ -29,8 +29,12 @@ module CoordinateValidator
 
 	def on_grid?(coordinates)
 		coordinates.all? do |coordinate| 
-			number(coordinate).between?(1,9) && letter(coordinate).between?('a', 'j')
+			valid_coordinate?(coordinate)
 		end
+	end
+
+	def valid_coordinate?(coordinate)
+		number(coordinate).between?(1,9) && letter(coordinate).between?('a', 'j')
 	end
 
 	def correct_number_of?(coordinates, ship)
