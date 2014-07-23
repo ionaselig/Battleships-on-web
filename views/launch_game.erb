@@ -10,17 +10,17 @@
 		<% @target_grid.cells.each do |row| %>
 			<tr>
 				<% row.each do |col| %>
-					<td><%= col.display %></td>
+					<td><%= col.display_own %></td>
 				<% end %>
 			</tr>
 		<% end %>
 	</table>
-	<form id="deploy-ships" action="/play_game" method="post">
+	<form id="deploy-ships" action="/launch_game/1" method="post">
 		<p>
-			Carrier: <label for="carrier_start">Start</label>
-			<input type="text" name="carrier_start">
-			<label for="carrier_end">End</label>
-			<input type="text" name="carrier_end">
+			<%=@current_ship.class%> <label for="ship_start">Start</label>
+			<input type="text" name="ship_start">
+			<label for="ship_end">End</label>
+			<input type="text" name="ship_end">
 		</p>
 		<button id="submit-ship-positions" type="submit">Deploy!</button>
 		</p>	

@@ -50,6 +50,14 @@ describe 'cell' do
 		expect(occupied_cell.display(false)).to eq('@') 
 	end
 
+	it 'should be able to display own ships' do
+		expect(occupied_cell.display_own).to eq('@')
+	end
+
+	it 'should not be able to display opponent ships' do
+		expect(occupied_cell.display_opponent).to eq('-') 
+	end
+
 	it 'should only display - on cells if option to hide ships is selected' do
 		expect(cell.display(true)).to eq('-')
 		expect(occupied_cell.display(true)).to eq('-')

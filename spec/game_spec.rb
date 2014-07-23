@@ -2,15 +2,29 @@ require 'game'
 
 describe Game do
 
-	let(:game) 		{ Game.new("me", "not me")																										}
+	let(:game) 		{ Game.new																																		}
 	let(:player1) { double :player1, :grid => grid1, :deploy_ships => nil, :display_grid => nil	}
-	let(:grid1)		{ double :grid1, :count_sunken_ships => 5	
-																			}
+	let(:player2)	{ double :player2																															}
+	let(:grid1)		{ double :grid1, :count_sunken_ships => 5																			}
+
+	it_should_behave_like 'a coordinate validator'
+
 	context 'At the start of the game' do
 	
-		it 'should start with 2 instances of the player class' do
-			expect(game.players[0]).to be_an_instance_of Player
-			expect(game.players[1]).to be_an_instance_of Player
+		it 'should start with no players' do
+			expect(game.players).to eq []
+		end
+
+		it 'can add players' do
+			game.add(player1)
+			game.add(player2)
+			expect(game.players).to eq [player1, player2]
+		end
+
+		it 'can count the players' do
+			expect(game.player_count).to eq 0
+			game.add(player1)
+			expect(game.player_count).to eq 1
 		end
 
 		it 'should know which is the current player' do
@@ -41,7 +55,8 @@ describe Game do
 		end
 
 		it 'can declare victory' do
-			game.other_player = player1
+			game.add(player2)
+			game.add(player1)
 			expect(game.victory_declared).to be true
 		end
 

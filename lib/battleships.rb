@@ -3,6 +3,8 @@ require_relative 'game'
 
 class BattleShips < Sinatra::Base
 
+  GAME = Game.new 
+
   enable :sessions
   set :session_secret, "My session secret"
   set :views, Proc.new{ File.join(root, '..', 'views') }
@@ -23,19 +25,21 @@ class BattleShips < Sinatra::Base
 		@name = params[:player]
     redirect '/name_input' if @name.empty?
     session[:greeting] = "Welcome #{@name} please enter your opponent"
-    session[:players] <<  params[:player]
-    
-    if session[:players].count == 2
-      session[:game] = Game.new(session[:players].first, session[:players].last)
-      redirect '/launch_game' 
-    end
-		
+    puts GAME.object_id
+    GAME.add(Player.new(params[:player]))
+    puts GAME.players
+    puts params[:player]
+    puts GAME.player_count
+
+    redirect '/launch_game' if GAME.player_count == 2
+    redirect '/full' if GAME.player_count > 2
     redirect '/new_game'
 	end
 
   get '/launch_game' do
-    @deploying_player = session[:game].current_player.name
-    @target_grid = session[:game].current_player.grid
+    @deploying_player = GAME.current_player.name
+    @target_grid = GAME.current_player.grid
+    @current_ship = GAME.current_player.ships[0]
     erb :launch_game
     # until session[:game].current_player.ships.empty?
     #   erb :launch_game
@@ -47,10 +51,20 @@ class BattleShips < Sinatra::Base
     #proceed to play_game once both ships have been placed
   end
 
-  post '/launch_game' do
-    @game.change_turn
-    redirect '/launch_game' 
+  post '/launch_game/:n' do |n|
+    @deploying_player = GAME.current_player.name
+    ship_to_deploy = GAME.current_player.ships[n.to_i-1]
+    coords = GAME.generate_coordinates(params[:ship_start].to_sym, params[:ship_end].to_sym)
+    GAME.current_player.deploy_ship_to(coords, ship_to_deploy)
+    @target_grid = GAME.current_player.grid
+    @current_ship = GAME.current_player.ships[n.to_i]
+    erb :launch_game
   end
+
+  # post '/launch_game' do
+  #   @game.change_turn
+  #   redirect '/launch_game' 
+  # end
 
   post '/play_game' do
     puts params

@@ -1,17 +1,31 @@
-require './lib/player'
+require_relative 'player'
+require_relative 'coordinate_validator'
 
 class Game
 
-	attr_accessor :current_player, :other_player, :status
+	attr_accessor :players, :status
 
-	def initialize(name1, name2)
-			@current_player = Player.new(name1)
-			@other_player = Player.new(name2)
+	include CoordinateValidator
+
+	def initialize
+			@players = []
 			@status = nil
 	end
 
-	def players
-		[@current_player, @other_player]
+	def current_player
+		players.first
+	end
+
+	def other_player
+		players.last
+	end
+
+	def add(player)
+		players << player
+	end
+
+	def player_count
+		players.count
 	end
 
 	def start_game
@@ -35,7 +49,7 @@ class Game
 	end
 
 	def change_turn
-		@current_player, @other_player = @other_player, @current_player
+		@players[0], @players[1] = @players[1], @players[0]
 	end
 
 	# def play_game
