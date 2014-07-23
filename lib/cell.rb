@@ -47,5 +47,13 @@ class Cell
 		return '@' if occupied? 
 		'~'
 	end
-	
+
+	def display_own
+		display(false)
+	end
+
+	def display_opponent
+		display(true)
+	end	
+
 end
