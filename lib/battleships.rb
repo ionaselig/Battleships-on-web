@@ -35,6 +35,7 @@ class BattleShips < Sinatra::Base
   get '/launch_game' do
     @deploying_player = session[:game].current_player.name
     @target_grid = session[:game].current_player.grid
+    @current_ship = session[:game].current_player.ships[0]
     erb :launch_game
     # until session[:game].current_player.ships.empty?
     #   erb :launch_game
@@ -46,10 +47,20 @@ class BattleShips < Sinatra::Base
     #proceed to play_game once both ships have been placed
   end
 
-  post '/launch_game' do
-    @game.change_turn
-    redirect '/launch_game' 
+  post '/launch_game/:n' do |n|
+    @deploying_player = session[:game].current_player.name
+    ship_to_deploy = session[:game].current_player.ships[n.to_i-1]
+    coords = session[:game].generate_coordinates(params[:ship_start].to_sym, params[:ship_end].to_sym)
+    session[:game].current_player.deploy_ship_to(coords, ship_to_deploy)
+    @target_grid = session[:game].current_player.grid
+    @current_ship = session[:game].current_player.ships[n.to_i]
+    erb :launch_game
   end
+
+  # post '/launch_game' do
+  #   @game.change_turn
+  #   redirect '/launch_game' 
+  # end
 
   post '/play_game' do
     puts params

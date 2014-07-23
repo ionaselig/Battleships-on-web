@@ -1,10 +1,13 @@
-require './lib/player'
+require_relative 'player'
+require_relative 'coordinate_validator'
 
 class Game
 
 	attr_accessor :current_player, :other_player, :status
 
-	def initialize(name1, name2)
+	include CoordinateValidator
+
+	def initialize(name1="player1", name2="player2")
 			@current_player = Player.new(name1)
 			@other_player = Player.new(name2)
 			@status = nil

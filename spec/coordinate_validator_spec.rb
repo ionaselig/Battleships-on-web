@@ -1,10 +1,8 @@
 require 'coordinate_validator'
 
-describe 'CoordinateValidator' do 
+shared_examples 'a coordinate validator' do 
 
-	class CoordinateHelper; include CoordinateValidator; end
-
-	let(:helper)  	{ CoordinateHelper.new							}	
+	let(:helper)  	{ described_class.new								}	
 	let(:ship)			{ double :ship, :shield_level => 2	}
 	let(:cell)			{ double :cell, :occupied? => false	}
 	let(:grid) 			{ double :grid, :cell => cell				}

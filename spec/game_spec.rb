@@ -4,8 +4,10 @@ describe Game do
 
 	let(:game) 		{ Game.new("me", "not me")																										}
 	let(:player1) { double :player1, :grid => grid1, :deploy_ships => nil, :display_grid => nil	}
-	let(:grid1)		{ double :grid1, :count_sunken_ships => 5	
-																			}
+	let(:grid1)		{ double :grid1, :count_sunken_ships => 5																			}
+
+	it_should_behave_like 'a coordinate validator'
+
 	context 'At the start of the game' do
 	
 		it 'should start with 2 instances of the player class' do
