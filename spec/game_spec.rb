@@ -2,9 +2,10 @@ require 'game'
 
 describe Game do
 
-	let(:game) 		{ Game.new("me", "not me")																																		}
+	let(:game) 		{ Game.new("me", "not me")																										}
 	let(:player1) { double :player1, :grid => grid1, :deploy_ships => nil, :display_grid => nil	}
-
+	let(:grid1)		{ double :grid1, :count_sunken_ships => 5	
+																			}
 	context 'At the start of the game' do
 	
 		it 'should start with 2 instances of the player class' do
@@ -39,13 +40,18 @@ describe Game do
 			expect(game.other_player).to be player1
 		end
 
-		xit 'can declare victory' do
+		it 'can declare victory' do
+			game.other_player = player1
+			expect(game.victory_declared).to be true
 		end
 
-		xit 'can end the game' do
+		it 'can end the game' do
+			game.end_game
+			expect(game.status).to eq :ended
 		end
 
-		xit 'can stop a player attacking the same cell twice' do
+		it 'can stop a player attacking the same cell twice' do
+		
 		end
 
 	end

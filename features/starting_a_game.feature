@@ -8,7 +8,7 @@ Feature: Starting the game
 		When I follow "launch-name-input"
 		Then I should see "What's your name?"
 		When I fill "player" with "Jeremy"
-		When I press "Go!"
+			And I press "Go!"
 		Then I should see "Welcome Jeremy please enter your opponent"
 
 	Scenario: Registering Error Player 1
@@ -16,14 +16,14 @@ Feature: Starting the game
 		When I follow "launch-name-input"
 		Then I should see "What's your name?"
 		When I fill "player" with ""
-		When I press "Go!"
+			And I press "Go!"
 		Then I should not see "Welcome Jeremy please enter your opponent"
 		
 	Scenario: Registering Player 2
 		Given "Jeremy" has registered
 		Then I should see "Welcome Jeremy please enter your opponent"
 		When I fill "player" with "Talal"
-		When I press "Go!"
+			And I press "Go!"
 		Then I should see "Battleships"
 		
 
