@@ -24,6 +24,10 @@ class Game
 		players << player
 	end
 
+	def player_count
+		players.count
+	end
+
 	def start_game
 		@status = :started
 	end

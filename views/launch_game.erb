@@ -10,7 +10,7 @@
 		<% @target_grid.cells.each do |row| %>
 			<tr>
 				<% row.each do |col| %>
-					<td><%= col.display(false) %></td>
+					<td><%= col.display_own %></td>
 				<% end %>
 			</tr>
 		<% end %>

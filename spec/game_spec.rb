@@ -15,9 +15,16 @@ describe Game do
 			expect(game.players).to eq []
 		end
 
-		it 'can a a player' do
+		it 'can add players' do
 			game.add(player1)
-			expect(game.players).to eq [player1]
+			game.add(player2)
+			expect(game.players).to eq [player1, player2]
+		end
+
+		it 'can count the players' do
+			expect(game.player_count).to eq 0
+			game.add(player1)
+			expect(game.player_count).to eq 1
 		end
 
 		it 'should know which is the current player' do
