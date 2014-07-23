@@ -6,39 +6,23 @@
 <body>
 	<h1>Battleships</h1>
 	<h3>Welcome <%=@deploying_player%>! Deploy your ships to battle</h3> 
-	<form name="place-ships" action="/play_game" method="post">
+	<table>
+		<% @target_grid.cells.each do |row| %>
+			<tr>
+				<% row.each do |col| %>
+					<td><%= col.display %></td>
+				<% end %>
+			</tr>
+		<% end %>
+	</table>
+	<form id="deploy-ships" action="/play_game" method="post">
 		<p>
 			Carrier: <label for="carrier_start">Start</label>
 			<input type="text" name="carrier_start">
 			<label for="carrier_end">End</label>
 			<input type="text" name="carrier_end">
 		</p>
-		<p>
-			Battleship: <label for="battleship_start">Start</label>
-			<input type="text" id="battleship_start">
-			<label for="battleship_end">End</label>
-			<input type="text" id="battleship_end">
-		</p>
-		<p>
-			Destroyer: <label for="destroyer_start">Start</label>
-			<input type="text" id="destroyer_start">
-			<label for="destroyer_end">End</label>
-			<input type="text" id="destroyer_end">
-		</p>
-		<p>
-			Submarine: <label for="submarine_start">Start</label>
-			<input type="text" id="submarine_start">
-			<label for="submarine_end">End</label>
-			<input type="text" id="submarine_end">
-		</p>
-		<p>
-			Patrol boat: <label for="patrol boat_start">Start</label>
-			<input type="text" id="patrol boat_start">
-			<label for="patrol boat_end">End</label>
-			<input type="text" id="patrol boat_end">
-		</p>
-		<p>
-		<button name="submit-ship-locations" type="submit">Deploy!</button>
+		<button id="submit-ship-positions" type="submit">Deploy!</button>
 		</p>	
 	</form>
 </body>

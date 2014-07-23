@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require_relative 'game'
 
 class BattleShips < Sinatra::Base
 
@@ -22,17 +23,32 @@ class BattleShips < Sinatra::Base
     redirect '/name_input' if @name.empty?
     session[:greeting] = "Welcome #{@name} please enter your opponent"
     session[:players] <<  params[:player]
-    redirect '/launch_game' if session[:players].count == 2
-		redirect '/new_game'
+    
+    if session[:players].count == 2
+      session[:game] = Game.new(session[:players].first, session[:players].last)
+      redirect '/launch_game' 
+    end
+		
+    redirect '/new_game'
 	end
 
   get '/launch_game' do
-    @deploying_player = session[:players].first
+    @deploying_player = session[:game].current_player.name
+    @target_grid = session[:game].current_player.grid
     erb :launch_game
-    puts params
+    # until session[:game].current_player.ships.empty?
+    #   erb :launch_game
+    # end
+    # ctr +=1
+    # redirect 'play_game' if ctr == 2
     #get player to place ships with validation
     #increment counter
     #proceed to play_game once both ships have been placed
+  end
+
+  post '/launch_game' do
+    @game.change_turn
+    redirect '/launch_game' 
   end
 
   post '/play_game' do

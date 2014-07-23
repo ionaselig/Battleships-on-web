@@ -1,5 +1,6 @@
-require './lib/grid'
-require './lib/cell'
+require_relative 'grid'
+require_relative 'cell'
+require_relative 'ship'
 
 class Player
 
